@@ -1,0 +1,13 @@
+<div class="confirmationDialog">
+  <mat-toolbar class="check-toolbar" color="warn" >
+    <h2>Confirmation Window
+  </h2>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <p class="question-text">{{this.confirmationMessage}}</p>
+  </div>
+  <div mat-dialog-actions >
+    <button class="yes-btn" mat-raised-button color="primary" (click)="onYesClick()">Yes</button>
+    <button class="no-btn" mat-raised-button  color="warn" (click)="onNoClick()">No</button>
+  </div>
+</div>

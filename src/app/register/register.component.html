@@ -1,0 +1,104 @@
+<mat-card class="login-card">
+  <mat-card-content>
+    <mat-toolbar class="register-toolbar" color="primary">
+      <span class="text-center">Register</span>
+    </mat-toolbar>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" id ="firstName" formControlName="firstName">
+    
+        <mat-error *ngIf="registerForm.get('firstName').invalid && registerForm.get('firstName').touched">
+          Your first name is required!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" id ="lastName" formControlName="lastName">
+    
+        <mat-error *ngIf="registerForm.get('lastName').invalid && registerForm.get('lastName').touched">
+          Your last name is required!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" id ="email" formControlName="email">
+    
+        <mat-error *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
+          Please provide a valid email address!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Birth Date</mat-label>
+        <input matInput [matDatepicker]="birthDatepicker" [max]="maxDate" formControlName="birthDate" id="birthDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="birthDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #birthDatepicker ></mat-datepicker>
+      
+        <mat-error *ngIf="registerForm.get('birthDate').invalid && registerForm.get('birthDate').touched">
+          Please provide your actual birth date!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Please enter your password</mat-label>
+        <input 
+          matInput 
+          [type]="hide ? 'password' : 'text'" 
+          id ="password" 
+          formControlName="password">
+          <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+    
+        <mat-error *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched">
+          Please provide a password of at least 6 characters!
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" id="confPassword" formControlName="confPassword">
+
+        <mat-error *ngIf="registerForm.get('confPassword').invalid && registerForm.get('confPassword').touched">
+          Please confirm your password!
+        </mat-error>
+
+      </mat-form-field>
+      <mat-error *ngIf="registerForm.hasError('passwordsMismatch') && registerForm.get('confPassword').touched">
+        Passwords do not match!
+      </mat-error>
+
+      <mat-form-field>
+        <mat-label>Link to your avatar(Image URL)</mat-label>
+        <input matInput type="text" id ="imageUrl" formControlName="imageUrl">
+      </mat-form-field>
+      
+      <div class="button-container">
+        <button mat-raised-button color="primary" [disabled]="registerForm.invalid || registerForm.get('confPassword').value !== registerForm.get('password').value">
+          Register <mat-icon>email</mat-icon>
+        </button>
+
+        <button mat-raised-button color="primary" type='button'
+          matTooltip="If you have allready registered, click here to confim your account. 
+          Otherwise please fill in the required information and click on &quot;Register&quot;." 
+          (click)="onConfirmRegister()">
+          Confirm Registration <mat-icon>done</mat-icon>
+        </button>
+  
+      </div>
+
+      <mat-error class="error-message" *ngIf="validationError">
+        {{ validationError }}
+      </mat-error>
+
+      <p class="text-center login-link">
+        Already have an account? <a routerLink="/auth">Log In</a>.
+      </p>
+    </form>
+  </mat-card-content>
+</mat-card>

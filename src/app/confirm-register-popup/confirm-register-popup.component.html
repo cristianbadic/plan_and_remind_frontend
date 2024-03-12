@@ -1,0 +1,41 @@
+<form class = "simple-add-dialog" [formGroup]="confirmRegisterForm" (ngSubmit)="confirmCode()">
+
+    <mat-toolbar  class="check-toolbar" color="primary">
+        <h2  >Confirm Registration</h2>
+    </mat-toolbar>
+
+    <div mat-dialog-content>
+    <p class="message-info">Please enter your email adress and the 8 character code you recived on your email.</p>
+
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" id ="email" formControlName="email">
+    
+        <mat-error *ngIf="confirmRegisterForm.get('email').invalid && confirmRegisterForm.get('email').touched">
+          Please provide a valid email address!
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Confirmation code</mat-label>
+        <input matInput id ="confirmationCode" formControlName="confirmationCode">
+    
+        <mat-error *ngIf="confirmRegisterForm.get('confirmationCode').invalid && confirmRegisterForm.get('confirmationCode').touched">
+          The confirmation code consists of 8 characters!
+        </mat-error>
+    </mat-form-field>
+
+    <p class="email-sent" *ngIf="emailSent" >A new confirmation code was sent to your email.</p>
+    <mat-error class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </mat-error>
+
+    </div> 
+
+    <div mat-dialog-actions class="button-container">
+        <button mat-raised-button type="button" color="accent" (click)="resendEmail()" 
+        [disabled]="confirmRegisterForm.get('email').invalid" >Resend Email</button>
+        <button mat-raised-button color="primary" [disabled]="confirmRegisterForm.invalid" >Confirm Code</button>
+    </div>
+
+</form>

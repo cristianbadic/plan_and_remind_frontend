@@ -1,0 +1,81 @@
+<mat-card class="eventWrapper" >
+  <!--  <ng-container *ngIf="eventType == 'group'">-->
+  <mat-card-header class="event-header">
+    <div class="header-content">
+    <mat-card-title class="event-title" >
+      <h3>
+        {{this.event.name}}
+      </h3>
+    </mat-card-title>
+    <button mat-icon-button [hidden]="this.event.specification != 'created_group' || this.event.isFuture != 'true' || this.possibleToResponde !== true" (click)="onAddNewInvitees()">
+      <mat-icon class="mat-icon-size" style="color:white">group_add</mat-icon>
+    </button>
+    <button mat-icon-button [hidden]="this.event.specification != 'created_single' || this.event.isFuture != 'true'" (click)="onUpdateSingleEventClick()">
+      <mat-icon class="mat-icon-size" style="color:white">edit</mat-icon>
+    </button>
+
+    <button mat-icon-button [hidden]="this.event.specification != 'created_group' || this.event.isFuture != 'true'" (click)="onUpdateCrearedGroupEventRemindersClick()">
+      <mat-icon class="mat-icon-size" style="color:white">edit</mat-icon>
+    </button>
+
+    <button mat-icon-button [hidden]="this.event.specification != 'invited_accepted' || this.event.isFuture != 'true'" (click)="onUpdateInvitedToGroupEventRemindersClick()">
+      <mat-icon class="mat-icon-size" style="color:white">edit</mat-icon>
+    </button>
+
+    </div>
+  </mat-card-header>
+  <div class="event-card-subtitles">
+    <div *ngIf="eventType == 'group'">
+      <mat-card-subtitle ><h5>Type: Group event</h5></mat-card-subtitle>
+      <mat-card-subtitle *ngIf="this.event.specification != 'created_group'"><h5>Created by: {{this.event.creatorFirstName}} {{this.event.creatorLastName}}</h5></mat-card-subtitle>
+      <mat-card-subtitle *ngIf="this.event.specification == 'created_group'"><h5>Created by: Yourself</h5></mat-card-subtitle>
+    </div>
+    <mat-card-subtitle *ngIf="eventType == 'single'"><h5> Type: Personal event</h5></mat-card-subtitle>
+    <mat-card-subtitle><h5><mat-icon style="padding-top: 3px">event</mat-icon>
+      Date: {{this.event!.eventDate}} at {{this.event!.startTime}}<span *ngIf="event.endTime != null">-{{this.event!.endTime}}</span></h5>
+    </mat-card-subtitle>
+  </div>
+  <mat-card-content class="event-card-content">
+    <div class="event-description">
+      <h4>Description:</h4>
+      <span>{{this.event.description}}</span>
+    </div>
+  </mat-card-content>
+
+  <ng-container>
+    <div class="bottom-container">
+      <div class="bottom-box">
+        <div class="invitees-details-container" *ngIf="eventType != 'single'" >
+          <div>
+            <span class="material-icons" (click)="openInviteesDialog('Attending', this.comingInvitees)"> event_available </span>attending
+          </div>
+          <div *ngIf="this.possibleToResponde === true">
+            <span class="material-icons"  (click)="openInviteesDialog('Pending', this.pendingInvitees)"> event </span>pending
+          </div>
+          <div *ngIf="this.event.specification == 'created_group'">
+            <span class="material-icons" (click)="openInviteesDialog('Non-Attending', this.decliningInvitees)"> event_busy </span>declined
+          </div>
+        </div>
+        <div class="actions-container" [ngSwitch]="event.specification">
+          <mat-card-actions class="event-actions" *ngSwitchCase="'created_single'" >
+            <!--          pt created_single past si future event acelasi endpoint se apeleaza doar ca butonul se numeste diferit-->
+            <button mat-raised-button color=warn class="cancel-button" (click)="cancelEvent('single')">
+              <span *ngIf="this.event.isFuture == 'true'">Cancel</span>
+              <span *ngIf="this.event.isFuture == 'false'">Delete</span>
+            </button>
+
+          </mat-card-actions >
+          <mat-card-actions class="event-actions" *ngSwitchCase="'created_group'">
+            <button mat-raised-button color=warn class="cancel-button" *ngIf="this.event.isFuture == 'true'" (click)="cancelEvent('group')">Cancel</button>
+            <button mat-raised-button color=warn class="cancel-button" *ngIf="this.event.isFuture == 'false'" (click)="cancelEvent('past-group')">Delete</button>
+          </mat-card-actions>
+          <mat-card-actions class="event-actions" *ngSwitchCase="'invited_accepted'">
+            <button mat-raised-button color=warn class="cancel-button" *ngIf="this.event.isFuture == 'false'" (click)="cancelEvent('past-invite')">Delete</button>
+          </mat-card-actions>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+</mat-card>

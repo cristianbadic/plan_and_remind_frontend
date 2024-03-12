@@ -1,0 +1,51 @@
+:host {
+    display: block;
+    width: 400px;
+}
+
+mat-toolbar.check-toolbar {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+  
+p {
+    margin-bottom: 10px;
+}
+  
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 3px;
+}
+
+.message-info {
+    display: flex;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+mat-form-field {
+    margin-top: 20px;
+    display: block;
+}
+
+.error-message {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 12px;
+    font-size: 14px; 
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.email-sent{
+    display: flex;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+  

@@ -1,0 +1,52 @@
+<mat-card class="eventWrapper" >
+  <ng-container *ngIf="objectType == 'invite'">
+    <mat-card-header class="event-header">
+      <div class="header-content">
+        <mat-card-title class="event-title" >
+          <h3>
+            {{this.event.name}}
+          </h3>
+        </mat-card-title>
+      </div>
+    </mat-card-header>
+    <div class="event-card-subtitles">
+      <mat-card-subtitle style="margin-top: 15px;">
+        <h5>Invited to this event by: {{this.event!.creatorFirstName}} {{this.event!.creatorLastName}}</h5>
+      </mat-card-subtitle>
+      <mat-card-subtitle><h5><mat-icon style="padding-top: 3px">event</mat-icon>
+        Date: {{this.event!.eventDate}} at {{this.event!.startTime}}<span *ngIf="event.endTime != null">-{{this.event!.endTime}}</span></h5>
+      </mat-card-subtitle>
+      <mat-card-subtitle><h5><mat-icon style="padding-top: 3px">event</mat-icon>
+        Answer until: {{this.event!.limitDate}} at {{this.event!.startTime}}</h5>
+      </mat-card-subtitle>
+    </div>
+    <mat-card-content class="event-card-content">
+      <div class="event-description">
+        <h4>Description:</h4>
+        <span>{{this.event.description}}</span>
+      </div>
+    </mat-card-content>
+
+    <ng-container *ngIf="event.isFuture=='true'">
+      <div class="bottom-box">
+        <div class="invitees-details-container">
+          <div>
+            <span class="material-icons" (click)="openInviteesDialog('Attending', this.comingInvitees)"> event_available </span>attending
+          </div>
+          <div>
+            <span class="material-icons" (click)="openInviteesDialog('Pending', this.pendingInvitees)"> event </span>pending
+          </div>
+        </div>
+        <div class="actions-container" [ngSwitch]="event.specification" >
+          <mat-card-actions class="event-actions" *ngSwitchCase="'invited_pending'" >
+            <button mat-raised-button class="accept-button" (click)="acceptEventInvite()">Accept</button>
+            <button mat-raised-button color=warn  (click)="declineEventInvite()">Decline</button>
+          </mat-card-actions>
+
+          <p *ngSwitchCase="'invited_accepted'" class="success-message">You have accepted this invitation</p>
+          <p *ngSwitchCase="'invited_denied'" class="success-message">You have declined this invitation</p>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</mat-card>

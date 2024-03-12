@@ -1,0 +1,44 @@
+<form class = "add-friends" [formGroup]="addAdditionalFriendsForm" (ngSubmit)="onSubmit()">
+    <mat-toolbar  class="add-single-toolbar" color="primary">
+        <h1 class="text-center">Add additional invitees</h1>
+      </mat-toolbar>
+
+    <div mat-dialog-content *ngIf="friends.length > 0">
+   
+    <mat-form-field >
+        <mat-label>Invite friends to the event:</mat-label>
+        <mat-select  formControlName="invitees" multiple>
+        
+          <mat-select-trigger>
+            <mat-chip-listbox>
+              <mat-chip-option *ngFor="let invitee of addAdditionalFriendsForm.get('invitees').value"
+                [removable]="true" (removed)="onInviteeRemoved(invitee)" color="primary" selected>
+                {{ invitee.userEntity.firstName }}  {{ invitee.userEntity.lastName}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip-option>
+            </mat-chip-listbox>
+          </mat-select-trigger>
+        
+          <mat-option *ngFor="let friend of friends" [value]="friend">
+            {{ friend.userEntity.firstName }}  {{ friend.userEntity.lastName}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    </div>
+
+    <div class="no-friends-message" *ngIf="friends.length === 0">
+      All your friends were invited to this event!
+    </div>
+
+    <div mat-dialog-actions class="buttons">
+        <button mat-raised-button color="primary" [disabled]="addAdditionalFriendsForm.invalid || friends.length === 0">Invite
+            <mat-icon>save</mat-icon>
+        </button>
+        <button mat-raised-button type='button' color=warn (click)="closeDialog()">Cancel
+            <mat-icon>cancel</mat-icon>
+        </button>
+        
+    </div>
+</form>
+

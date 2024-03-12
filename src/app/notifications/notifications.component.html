@@ -1,0 +1,21 @@
+<h2 class="page-title">Friend Request Notifications and Event Reminders</h2>
+<div *ngIf="notifications.length !== 0">
+  <p class="unchecked-count">You have <span class="unchecked-number">{{ getUncheckedNotificationsCount() }}</span> unchecked notification(s):</p>
+</div>
+
+<div class="notifications-container" *ngIf="notifications.length > 0">
+  <button mat-raised-button class="delete-all-button" color="warn" (click)="deleteAllNotifications()">Delete All Notifications</button>
+  <div class="notification" *ngFor="let notification of notifications"
+  [ngClass]="{ 'bold-message': notification.seen === 0 }">
+
+  <div class="message" [ngClass]="{ 'expanded': notification.expanded }" (click)="toggleMessageExpand(notification)">
+    {{ notification.message }}
+  </div>
+    <button mat-icon-button class="delete-button" color="warn" (click)="deleteNotification(notification)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
+<div class="no-notifications" *ngIf="notifications.length === 0">
+  <p>No notifications currently.</p>
+</div>

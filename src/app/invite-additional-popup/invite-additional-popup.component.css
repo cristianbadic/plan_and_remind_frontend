@@ -1,0 +1,35 @@
+.add-friends {
+   
+    margin: 0 auto;
+    text-align: center;
+}
+
+mat-form-field {
+    margin-top: 20px;
+    display: block;
+}
+
+mat-toolbar.add-single-toolbar {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+  .buttons{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+.sub-title{
+    color: black;
+    margin-bottom: 20px;
+}
+
+.no-friends-message {
+  font-size: 18px;
+  font-weight: bold; 
+  margin-top: 10px;
+}
+  

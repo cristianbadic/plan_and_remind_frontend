@@ -1,0 +1,103 @@
+.reminder-dialog {
+   
+    margin: 0 auto;
+    text-align: center;
+}
+
+mat-form-field {
+    margin-top: 20px;
+    display: block;
+}
+
+.error-message {
+    margin-top: 15px;
+    font-size: 14px; 
+    font-weight: bold;
+}
+
+mat-toolbar.add-single-toolbar {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.checkbox-container {
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+    flex-direction: column;
+  }
+
+  .checkbox-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+.checkbox-label {
+    margin-left: 18px;
+    cursor: pointer;
+}
+
+.additional-reminder-section {
+    margin-top: 20px;
+}
+  
+.reminder-text {
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+  
+.send-to-radio-group {
+    display: flex;
+    flex-direction: column;
+}
+  
+.time-format-radio-group {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+  
+.amount-before-input {
+    width: 60px;
+}
+
+.additional-reminder-radio-group.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  .time-format-radio-group.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .buttons{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .time-format-radio-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .send-to-radio-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+.sub-title{
+    color: black;
+    margin-bottom: 20px;
+}

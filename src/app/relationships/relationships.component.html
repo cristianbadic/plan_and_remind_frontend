@@ -1,0 +1,26 @@
+<mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Incoming requests">
+      <div class="card-container">
+        <div *ngIf="incomingRequests.length === 0" class="empty-list-message">
+          No incoming requests!
+        </div>
+        <app-user-item *ngFor="let user of incomingRequests" [user]="user"></app-user-item>
+      </div>
+    </mat-tab>
+    <mat-tab label="Friends">
+      <div *ngIf="friends.length === 0" class="empty-list-message">
+        You have not befriended anyone.
+      </div>
+      <div class="card-container">
+        <app-user-item *ngFor="let user of friends" [user]="user"></app-user-item>
+      </div>
+    </mat-tab>
+    <mat-tab label="Outgoing requests">
+      <div *ngIf="outgoingRequests.length === 0" class="empty-list-message">
+        No outgoing requests!
+      </div>
+      <div class="card-container">
+        <app-user-item *ngFor="let user of outgoingRequests" [user]="user"></app-user-item>
+      </div>
+    </mat-tab>
+  </mat-tab-group>

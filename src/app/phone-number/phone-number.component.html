@@ -1,0 +1,23 @@
+<div class="phone-number-container">
+  <h2 class="page-title">Add or Update Your Phone Number</h2>
+  <form class="phone-number-form" [formGroup]="phoneNumberForm" (ngSubmit)="openConfirmationDialog()">
+    <div class="input-container">
+      <mat-form-field class="phone-number-field">
+        <mat-label>Your phone number</mat-label>
+        <input matInput type="tel" id="phoneNumber" formControlName="phoneNumber">
+        <mat-hint>Include country code</mat-hint>
+        <mat-error *ngIf="phoneNumberForm.get('phoneNumber').invalid && phoneNumberForm.get('phoneNumber').touched">
+          {{ inputErrorMessage }}
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button class="button" color="primary" [disabled]="phoneNumberForm.invalid">Confirm Phone Number</button>
+
+      <div class="success-message" *ngIf="successfullyAdded">Your phone number was successfully updated.</div>
+      <mat-error class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </mat-error>
+    </div>
+  </form>
+</div>
+

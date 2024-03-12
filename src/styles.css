@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::ng-deep .mat-tab-label {
+    font-size: 18px;
+}
+
+.timepicker-overlay {
+    z-index: 10000000 !important;
+}
+  
+.timepicker-backdrop-overlay {
+    z-index: 10000000 !important;
+}
+
+header.timepicker__header {
+    background-color: #3f51b5 !important;
+  }
+  
+.timepicker-button {
+color: #3f51b5 !important;
+}
+
+
+[_nghost-vlb-c48] { 
+--clock-hand-color: #3f51b5 !important;
+}
+
+.clock-face__clock-hand {
+    background-color: #3f51b5 !important;
+    &:after {
+    background-color: #3f51b5 !important;
+}
+}
+
+.clock-face__clock-hand_minute:before {
+    border: 4px solid #3f51b5 !important;
+}
+
+.clock-face__number > span.active {
+    background-color: #3f51b5 !important;
+}

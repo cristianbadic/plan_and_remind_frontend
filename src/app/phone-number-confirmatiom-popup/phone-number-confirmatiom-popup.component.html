@@ -1,0 +1,31 @@
+<form [formGroup]="confirmPhoneNrForm" (ngSubmit)="confirmCode()">
+
+    <mat-toolbar  class="check-toolbar" color="primary">
+        <h2  >Confirm Phone Number</h2>
+    </mat-toolbar>
+
+    <div mat-dialog-content>
+    <p class="message-info">Please enter the 8 character code you recived on your phone.</p>
+
+    <mat-form-field>
+        <mat-label>Confirmation code</mat-label>
+        <input matInput id ="confirmationCode" formControlName="confirmationCode">
+    
+        <mat-error *ngIf="confirmPhoneNrForm.get('confirmationCode').invalid && confirmPhoneNrForm.get('confirmationCode').touched">
+          The confirmation code consists of 8 characters!
+        </mat-error>
+    </mat-form-field>
+
+    <p class="sms-sent" *ngIf="smsSent" >A new confirmation code was sent to your phone.</p>
+    <mat-error class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </mat-error>
+
+    </div> 
+
+    <div mat-dialog-actions class="button-container">
+        <button mat-raised-button type="button" color="accent" (click)="resendSms()" >Resend SMS</button>
+        <button mat-raised-button color="primary" [disabled]="confirmPhoneNrForm.invalid" >Confirm Code</button>
+    </div>
+
+</form>

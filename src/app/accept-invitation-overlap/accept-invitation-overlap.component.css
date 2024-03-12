@@ -1,0 +1,45 @@
+:host {
+    display: block;
+    width: 500px;
+}
+
+  mat-toolbar.check-toolbar {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  p {
+    margin-bottom: 10px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 3px;
+  }
+
+  .message-warning {
+    display: flex;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .message-black {
+    display: flex;
+    color: black;
+  }
+  
+  .question-text {
+    display: flex;
+    margin-top:20px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+  }
+  

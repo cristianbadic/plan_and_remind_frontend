@@ -1,0 +1,25 @@
+
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .brand {
+    font-size: 20px;
+    margin-right: auto;
+  }
+  
+  .links {
+    display: flex;
+    margin-left: auto;
+  }
+  
+  button {
+    padding: 0 0.5rem;
+  }
+
+  .icon-display {
+    transform: scale(2);
+ }

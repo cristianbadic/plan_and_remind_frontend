@@ -1,0 +1,85 @@
+<form class = "reminder-dialog" [formGroup]="addReminderForm" (ngSubmit)="onSubmit()">
+    <mat-toolbar  class="add-single-toolbar" color="primary">
+        <h1 class="text-center">{{ acceptInvitation === true ? 'Save reminders' : 'Update reminders' }}</h1>
+      </mat-toolbar>
+  
+    <div mat-dialog-content>
+   
+    <div class="additional-reminder-section">
+        <h3 class="sub-title"> The event will start on {{eventWhitoutReminderData.eventDate}} at {{eventWhitoutReminderData.startTime}}.</h3>    
+        <div mat-form-field class="checkbox-container">
+            <div class="checkbox-wrapper">
+            <mat-checkbox formControlName="defaultReminder" id="defaultReminder" (change)="onDefaultReminderChange($event)"
+            color="primary">
+            Send the default reminder
+            </mat-checkbox>
+            <mat-icon class="checkbox-label" matSuffix matTooltip="For a simple event, the default reminder is 30 minutes before the start of the event">
+                info
+            </mat-icon>
+        </div>
+        </div>
+  
+        <mat-error *ngIf="addReminderForm.hasError('defaultInvalid')">
+          Not possible to send the default reminder since the event will take place in less then 30 minutes!
+        </mat-error>
+  
+        <div mat-form-field class="checkbox-container">
+            <div class="checkbox-wrapper">
+            <mat-checkbox formControlName="noAdditionalReminder" id="noAdditionalReminder" color="warn" (change)="onAdditionalChange($event)">
+                Don't want an additional reminder
+            </mat-checkbox>
+        </div>
+        </div>
+    
+        <p class="reminder-text">Please select how long before the start of the event you want to be reminded:</p>
+  
+        <div class="time-format-radio-group">
+          <mat-radio-group class="radio-group" formControlName="timeFormat" color="primary">
+            <mat-radio-button value="days">Days</mat-radio-button>
+            <mat-radio-button value="hours">Hours</mat-radio-button>
+            <mat-radio-button value="minutes">Minutes</mat-radio-button>
+          </mat-radio-group>
+        </div>
+  
+        <div class="amount-before-field">
+          <mat-form-field >
+            <mat-label>Amount before additional reminder</mat-label>
+            <input (keypress)="numberOnly($event)" matInput type="number" formControlName="amountBefore" id="amountBefore" placeholder="Amount" min="0">
+            <mat-error *ngIf="addReminderForm.get('amountBefore').invalid && addReminderForm.get('amountBefore').touched">
+              Please enter a valid amount.
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <mat-error *ngIf="addReminderForm.hasError('additionalInvalid')">
+          The additional reminder can't be set before the current moment!
+        </mat-error>
+  
+        <p class="reminder-text">Please select where you want your reminders to be sent:</p>
+        
+        <div class="send-to-radio-group">
+          <mat-radio-group class="radio-group" formControlName="sendTo" color="primary">
+            <mat-radio-button value="notification">App Notification</mat-radio-button>
+            <mat-radio-button value="email">Email</mat-radio-button>
+            <mat-radio-button *ngIf="confirmedPhoneNr === true" value="sms">SMS</mat-radio-button>
+            <mat-radio-button value="email_notification" >Email & App Notification</mat-radio-button>
+            <mat-radio-button *ngIf="confirmedPhoneNr === true" value="sms_email">SMS & Email</mat-radio-button>
+            <mat-radio-button *ngIf="confirmedPhoneNr === true" value="sms_notification">SMS & App Notification</mat-radio-button>
+            <mat-radio-button *ngIf="confirmedPhoneNr === true" value="all_options">SMS & Email & App Notification</mat-radio-button>
+          </mat-radio-group>
+        </div>
+  
+      </div>
+  
+    </div>
+    <div mat-dialog-actions class="buttons">
+        <button mat-raised-button color="primary" [disabled]="addReminderForm.invalid">Save
+            <mat-icon>save</mat-icon>
+        </button>
+        <button mat-raised-button type='button' color=warn (click)="closeDialog()">Cancel
+            <mat-icon>cancel</mat-icon>
+        </button>
+        
+    </div>
+  </form>
+  

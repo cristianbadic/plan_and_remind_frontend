@@ -1,0 +1,84 @@
+<!-- <mat-card>
+    <mat-card-content>
+      <mat-toolbar class="register-toolbar" color="primary">
+        <span class="text-center">Register</span>
+      </mat-toolbar>
+      <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+        <mat-form-field apperance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" ngModel name="firstName" id="firstName" required>
+        </mat-form-field>
+  
+        <mat-form-field apperance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" ngModel name="lastName" id="lastName" required>
+        </mat-form-field>
+  
+        <mat-form-field apperance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" ngModel name="email" id="email" required email #email="ngModel">
+          
+          <mat-error *ngIf="!email.valid && email.touched">
+            Please provide a valid email address!
+          </mat-error>
+        </mat-form-field>
+        
+
+        <mat-form-field apperance="outline">
+          <mat-label>Birth Date</mat-label>
+          <input matInput [matDatepicker]="birthDatepicker" [max] = "maxDate" ngModel name="birthDate" id="birthDate" required #birthDate="ngModel">
+          <mat-datepicker-toggle matSuffix [for]="birthDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #birthDatepicker ></mat-datepicker>
+
+          <mat-error *ngIf="!birthDate.valid && birthDate.touched">
+            Please provide your actual birth date!
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field apperance="outline">
+          <mat-label>Pleas enter your password</mat-label>
+          <input 
+            matInput
+            [type]="hide ? 'password' : 'text'" 
+            type="password" 
+            ngModel name="password" 
+            id="password" 
+            required 
+            minlength="6" 
+            #passoword="ngModel">
+          
+          <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="!passoword.valid && passoword.touched">
+            Please provide a password of at least 6 characters!
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field apperance="outline">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="password" ngModel name="confPassword" id="confPassword" required minlength="6" #confPassword="ngModel">
+
+          <mat-error *ngIf="!confPassword.valid && confPassword.touched">
+            Please confirm your password!
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-error *ngIf="registerForm.controls.confirmPassword.dirty && registerForm.controls.confirmPassword.value !== registerForm.controls.password.value">
+          Passwords do not match.
+        </mat-error>
+  
+        <button mat-raised-button color="primary" [disabled]="!registerForm.form.valid || registerForm.controls.confirmPassword.value !== registerForm.controls.password.value">
+          Register <mat-icon>person_add</mat-icon>
+        </button>
+  
+        <mat-error class="error-message" *ngIf="validationError">
+          {{ validationError }}
+        </mat-error>
+  
+        <p class="text-center">
+          Already have an account? <a routerLink="/auth">Log In</a>.
+        </p>
+      </form>
+    </mat-card-content>
+</mat-card> -->

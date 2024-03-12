@@ -1,0 +1,12 @@
+<mat-toolbar  class="check-toolbar" color="warn">
+    <h2  >Limit response date was exceeded!</h2>
+</mat-toolbar>
+
+<div mat-dialog-content>
+  <p class="message-warning">Unfortunately, you can't accept the invitation to the event {{ this.canNotAcceptEvent.name}}, since the response deadline has passed.</p>
+  <p class="message-warning">The response limit date was on {{ this.canNotAcceptEvent.limitDate}} at {{ this.canNotAcceptEvent.startTime}}. Your invitation was automaticly declined.</p>
+ 
+</div>
+<div mat-dialog-actions class="button-container">
+    <button mat-raised-button (click)="closeDialog()" color="warn">Close</button>
+</div>

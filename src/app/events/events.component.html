@@ -1,0 +1,51 @@
+<button mat-button [matMenuTriggerFor]="eventsmenu"><mat-icon>event</mat-icon>Add Event</button>
+<mat-menu #eventsmenu="matMenu">
+  <button mat-menu-item (click)="onCreateSingleEventClick()"><mat-icon>person</mat-icon>Personal event</button>
+  <button mat-menu-item (click)="onCreateGroupEventClick()"><mat-icon>group</mat-icon>Group event</button>
+</mat-menu>
+<mat-tab-group (selectedTabChange)="onEventTabChange($event)">
+  <mat-tab label="Event Invites">
+    <div class="card-container" *ngIf=" upcomingEventsInvites != undefined && upcomingEventsInvites.length != 0">
+        <app-invitation-item class="invitation-item" *ngFor="let invite of this.upcomingEventsInvites"
+                             [eventInvite]="invite"
+        (declineInviteEvent)="declineInvitation($event)"
+        (acceptInvitation)="acceptInvitationToEvent()">
+        </app-invitation-item>
+    </div>
+    <div class="empty-list-message" *ngIf="this.upcomingEventsInvites == undefined || this.upcomingEventsInvites.length == 0" >
+      <span>No Invitations</span>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Today and Upcoming Events">
+    <div class="card-container" *ngIf="this.upcomingEvents != undefined && this.upcomingEvents.length != 0">
+      <app-event-item class="event-item" *ngFor="let event of this.upcomingEvents" [event]="event"
+                      (deleteSingleEventEvent)="deleteSingleEvent($event)"
+                      (deleteGroupEventEvent)="deleteGroupEvent($event)"
+                      (updateEventList)="updateListOfEvents()"
+                      (updateRemindersForCreatedGroupEvent)="updatedCreatedGroupEvent()"
+                      (updateRemindersForInvitedToGroupEvent)="updatedInvitedToGroupEvent()"
+                      (deletePastGroupEventEvent)="deletePastGroupEvent($event)">
+      </app-event-item>
+    </div>
+    <div class="empty-list-message" *ngIf="this.upcomingEvents == undefined || this.upcomingEvents.length == 0" >
+      <span>No Upcoming Events</span>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Past Events">
+    <div class="card-container" *ngIf="this.pastEvents != undefined && this.pastEvents.length != 0 ">
+    <app-event-item class="event-item" *ngFor="let event of this.pastEvents" [event]="event"
+                    (deleteSingleEventEvent)="deleteSingleEvent($event)"
+                    (deleteGroupEventEvent)="deleteGroupEvent($event)"
+                    (deletePastGroupEventEvent)="deletePastGroupEvent($event)"
+                    (deletePastInviteEvent)="deletePastInvite($event)">
+    </app-event-item>
+    </div>
+    <div class="empty-list-message" *ngIf="this.pastEvents == undefined || this.pastEvents.length == 0" >
+      <span>No Past Events</span>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+

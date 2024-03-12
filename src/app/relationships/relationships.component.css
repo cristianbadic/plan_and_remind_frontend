@@ -1,0 +1,13 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.empty-list-message {
+    margin-top: 60px;
+    font-size: 18px;
+    /* color: #888; */
+    text-align: center;
+  }

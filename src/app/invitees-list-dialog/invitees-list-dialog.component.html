@@ -1,0 +1,21 @@
+<div class="invitees-list-wrapper">
+  <div class="title-wrapper">
+    <h2 mat-dialog-title>{{this.data.type}} Invitees</h2>
+    <button mat-icon-button class="closing-button" (click)="this.dialogRef.close()"><mat-icon>close</mat-icon> </button>
+  </div>
+  <mat-dialog-content class="content-wrapper">
+    <div class="center-wrapper">
+      <mat-list class="invitees-list" *ngIf="this.users!.length > 0">
+        <mat-list-item  *ngFor="let user of users" >
+          <h4>{{user.firstName}} {{user.lastName}}</h4>
+        </mat-list-item>
+      </mat-list>
+
+      <div  *ngIf="users == undefined || users.length == 0" class="center-wrapper">
+      <span class="empty-list-message" *ngIf="this.data.type == 'Attending'">No invitee has accepted the invitation.</span>
+      <span   class="empty-list-message" *ngIf="this.data.type == 'Non-Attending'">No invitee declined the invitation. </span>
+      <span  class="empty-list-message" *ngIf="this.data.type == 'Pending'">All invitees have responded to the invitation.</span>
+    </div>
+    </div>
+  </mat-dialog-content>
+</div>

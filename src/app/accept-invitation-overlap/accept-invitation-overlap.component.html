@@ -1,0 +1,21 @@
+<mat-toolbar  class="check-toolbar" color="warn">
+    <h2  >Event Overlap Warning</h2>
+</mat-toolbar>
+
+<div mat-dialog-content>
+  <p class="message-warning">You have already existing events that will happen during the date and time interval of this event!</p>
+  <p *ngIf="overlappingEvents.length === 1" class="message-black">The event is:</p>
+  <p *ngIf="overlappingEvents.length > 1" class="message-black">The events are:</p>
+  <ul>
+    <li *ngFor="let event of overlappingEvents" class="message-black">
+      {{ event.eventName }} - Organized by {{ event.firstName }} {{ event.lastName }}
+    </li>
+  </ul>
+  
+    <p class="question-text">Do you still want to accept the invitation to this event?</p>
+
+</div>
+<div mat-dialog-actions class="button-container">
+    <button mat-raised-button (click)="acceptInvitation()" color="primary">Yes</button>
+    <button mat-raised-button (click)="closeDialog()" color="warn">Go Back</button>
+</div>

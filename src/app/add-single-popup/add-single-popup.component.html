@@ -1,0 +1,138 @@
+
+<form class = "simple-add-dialog" [formGroup]="addSimpleEventForm" (ngSubmit)="onSubmit()">
+  <mat-toolbar  class="add-single-toolbar" color="primary">
+      <h1 class="text-center">{{ eventIdForUpdate !== -1 ? 'Update your Event' : 'Add a personal Event' }}</h1>
+    </mat-toolbar>
+
+  <div mat-dialog-content>
+  <mat-form-field>
+      <mat-label>Event name</mat-label>
+      <input matInput type="text" id ="name" formControlName="name">
+
+      <mat-error *ngIf="addSimpleEventForm.get('name').invalid && addSimpleEventForm.get('name').touched">
+          An event has to have a Name!
+      </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+      <mat-label>Event description ({{myInput.value.length}}/{{myInput.maxLength}})</mat-label>
+      <textarea placeholder="Description" matInput #myInput maxlength="1000" type="text" id ="description" formControlName="description"></textarea>
+      <!-- <mat-icon matSuffix>description</mat-icon> -->
+  </mat-form-field>
+
+  <mat-form-field>
+      <mat-label>Event Date</mat-label>
+      <input matInput [matDatepicker]="eventDatepicker" [min]="minDate" formControlName="eventDate" id="eventDate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="eventDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker #eventDatepicker ></mat-datepicker>
+  
+      <mat-error *ngIf="addSimpleEventForm.get('eventDate').invalid && addSimpleEventForm.get('eventDate').touched">
+      The selected date, can't be in the past!
+      </mat-error>
+  </mat-form-field>
+
+  <mat-form-field> 
+      <mat-label>Start Time</mat-label>    
+      <input matInput class="timepicker" [ngxTimepicker]="picker" [format]=24 placeholder="Start Time" readonly formControlName="startTime" id="startTime">
+      <ngx-material-timepicker #picker>
+      </ngx-material-timepicker>
+
+      <mat-error *ngIf="addSimpleEventForm.get('startTime').invalid && addSimpleEventForm.get('startTime').touched">
+          Please select the start time for the event!
+      </mat-error>
+  </mat-form-field>
+  
+  <mat-error *ngIf="addSimpleEventForm.hasError('dateTimeInvalid')">
+      Setting events in the past is not accepted!
+    </mat-error>
+
+  <mat-form-field> 
+      <mat-label>End Time</mat-label>    
+      <input matInput class="timepicker" [ngxTimepicker]="picker2" [format]=24 placeholder="EndTime" readonly formControlName="endTime" id="endTime">
+      <ngx-material-timepicker #picker2>
+      </ngx-material-timepicker>
+  </mat-form-field>
+
+  <mat-error *ngIf="addSimpleEventForm.hasError('timeRangeInvalid')">
+      The start time can not be after the end time!
+  </mat-error>
+  
+  <div class="additional-reminder-section">
+      <h3 class="sub-title"> Reminders for the event</h3>    
+      <div mat-form-field class="checkbox-container">
+          <div class="checkbox-wrapper">
+          <mat-checkbox formControlName="defaultReminder" id="defaultReminder" (change)="onDefaultReminderChange($event)"
+          color="primary">
+          Send the default reminder
+          </mat-checkbox>
+          <mat-icon class="checkbox-label" matSuffix matTooltip="For a simple event, the default reminder is 30 minutes before the start of the event">
+              info
+          </mat-icon>
+      </div>
+      </div>
+
+      <mat-error *ngIf="addSimpleEventForm.hasError('defaultInvalid')">
+        Not possible to send the default reminder since the event will take place in less then 30 minutes!
+      </mat-error>
+
+      <div mat-form-field class="checkbox-container">
+          <div class="checkbox-wrapper">
+          <mat-checkbox formControlName="noAdditionalReminder" id="noAdditionalReminder" color="warn" (change)="onAdditionalChange($event)">
+              Don't want an additional reminder
+          </mat-checkbox>
+      </div>
+      </div>
+  
+      <p class="reminder-text">Please select how long before the start of the event you want to be reminded:</p>
+
+      <div class="time-format-radio-group">
+        <mat-radio-group class="radio-group" formControlName="timeFormat" color="primary">
+          <mat-radio-button value="days">Days</mat-radio-button>
+          <mat-radio-button value="hours">Hours</mat-radio-button>
+          <mat-radio-button value="minutes">Minutes</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="amount-before-field">
+        <mat-form-field >
+          <mat-label>Amount before additional reminder</mat-label>
+          <input (keypress)="numberOnly($event)" matInput type="number" formControlName="amountBefore" id="amountBefore" placeholder="Amount" min="0">
+          <mat-error *ngIf="addSimpleEventForm.get('amountBefore').invalid && addSimpleEventForm.get('amountBefore').touched">
+            Please enter a valid amount.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-error *ngIf="addSimpleEventForm.hasError('additionalInvalid')">
+        The additional reminder can't be set before the current moment!
+      </mat-error>
+
+      <p class="reminder-text">Please select where you want your reminders to be sent:</p>
+      
+      <div class="send-to-radio-group">
+        <mat-radio-group class="radio-group" formControlName="sendTo" color="primary">
+          <mat-radio-button value="notification">App Notification</mat-radio-button>
+          <mat-radio-button value="email">Email</mat-radio-button>
+          <mat-radio-button *ngIf="confirmedPhoneNr === true" value="sms">SMS</mat-radio-button>
+          <mat-radio-button value="email_notification" >Email & App Notification</mat-radio-button>
+          <mat-radio-button *ngIf="confirmedPhoneNr === true" value="sms_email">SMS & Email</mat-radio-button>
+          <mat-radio-button *ngIf="confirmedPhoneNr === true" value="sms_notification">SMS & App Notification</mat-radio-button>
+          <mat-radio-button *ngIf="confirmedPhoneNr === true" value="all_options">SMS & Email & App Notification</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+    </div>
+
+  </div>
+  <div mat-dialog-actions class="buttons">
+      <button mat-raised-button color="primary" [disabled]="addSimpleEventForm.invalid">Save
+          <mat-icon>save</mat-icon>
+      </button>
+      <button mat-raised-button type='button' color=warn (click)="closeDialog()">Cancel
+          <mat-icon>cancel</mat-icon>
+      </button>
+      
+  </div>
+</form>
+

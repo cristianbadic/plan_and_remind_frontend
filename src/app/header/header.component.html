@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" class="navbar">
+  <div class="brand">Plan & Remind App</div>
+  <div class="links">
+    <button mat-button *ngIf="isAuth" routerLink="/edit-profile">Edit Profile</button>
+    <button mat-button *ngIf="isAuth" routerLink="/events">My Events</button>
+    <button mat-button *ngIf="!isAuth" type="button" routerLink="/auth">Login</button>
+    <button mat-button *ngIf="isAuth" routerLink="/notifications">Notifications</button>
+    <button mat-button *ngIf="isAuth" routerLink="/phone-number"><mat-icon class="icon-display">perm_phone_msg</mat-icon></button>
+    <button mat-button *ngIf="isAuth" routerLink="/friends">Search</button>
+    <button mat-button *ngIf="isAuth" routerLink="/relationships">Friends</button>
+    <button mat-button *ngIf="isAuth" type="button" (click)="onLogout()">Logout</button>
+
+
+  </div>
+</mat-toolbar>

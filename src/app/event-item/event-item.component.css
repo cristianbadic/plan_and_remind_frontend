@@ -1,0 +1,136 @@
+
+.eventWrapper {
+
+  display: flex;
+  border-radius: 10px;
+  align-items:center;
+  flex-direction: column;
+  height:100%;
+  width:auto;
+  overflow: hidden;
+  padding-bottom: 10px;
+
+  box-shadow: #707070;
+  margin:0 10px 10px 10px;
+  padding-top: 0;
+ 
+}
+.event-title{
+  background-color: #3f51b5;
+  color: white;
+  display: flex;
+  align-self: center;
+  text-align:center;
+  justify-content: center;
+  align-items:center ;
+  flex:1;
+
+}
+
+.event-header {
+  background-color: #3f51b5;
+  padding-bottom: 10px;
+  height: auto;
+  padding-top:0;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+}
+
+.header-content{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+}
+.actions-container {
+  width:100%;
+}
+.event-card-subtitles{
+  display: flex;
+  width: 100%;
+  justify-content: left;
+  flex-direction:column;
+  padding-left: 30px;
+}
+
+.mat-icon-size {
+  height: 20px;
+  width: 20px;
+  font-size: 20px;
+}
+.event-actions {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-left: 70px;
+  margin-right: 70px;
+  align-self: flex-end;
+}
+.event-description {
+  font-size: 15px;
+  width: 100%;
+  justify-self: left;
+}
+.event-card-content {
+  width: 100%;
+  /* min-height: 150px;
+  overflow:hidden; */
+}
+.bottom-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  position: relative; 
+  width: 100%;
+}
+
+.bottom-box {
+  display: flex;
+  width:100%;
+  height: auto;
+  min-height:120px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.success-message {
+  color: green;
+  font-size: 16px;
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.decline-message {
+  color: firebrick;
+  font-size: 16px;
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+
+.invitees-details-container{
+  display: flex;
+  width: 80%;
+
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+
+.cancel-button {
+
+  color:white;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+}
+
+.material-icons:hover {
+  cursor: pointer;
+}

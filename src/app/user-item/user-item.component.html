@@ -1,0 +1,61 @@
+<mat-card class="mat-card">
+    <mat-card-header color="primary">
+      <div class="avatar-wrapper">
+        <img mat-card-avatar 
+        [src]="user.userEntity.imageUrl"
+        (error)="onImageError()"
+        alt="User Image">
+      </div>
+    </mat-card-header>
+
+    <mat-card-content class="card-fields">
+      <mat-card-title class="title">{{ user.userEntity.firstName }} {{ user.userEntity.lastName }}</mat-card-title>
+
+      <div class="field">
+        <mat-icon>email</mat-icon>
+        <p class="field-text"> {{ user.userEntity.email }}</p>
+      </div>
+
+      <div class="field">
+        <mat-icon>calendar_today</mat-icon>
+        <p class="field-text"> {{ user.userEntity.birthDate | date }}</p>
+      </div>
+
+      <ng-container [ngSwitch]="user.status">
+        <ng-container *ngSwitchCase="'nothing'">
+         
+          <p *ngIf="friendRequestSent" class="success-message">Your friend request was sent!</p>
+
+          <div class="button-container">
+            <button mat-raised-button color="primary" (click)="addFriend()" [hidden]="friendRequestSent">Add Friend</button>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'accepted'">
+          <p class="messages">You are friends!</p>
+        </ng-container>
+        
+        <ng-container *ngSwitchCase="'received'">
+          <p class="messages" [hidden]="requestAccepted || requestDeclined">Received Friend Request</p>
+
+          <p *ngIf="requestAccepted" class="success-message">Request Accepted</p>
+          <p *ngIf="requestDeclined" class="error-message">Request Declined</p>
+
+          <div class="button-container">
+            <button mat-raised-button class="action-button" color="primary" (click)="acceptRequest()" [hidden]="requestAccepted || requestDeclined">Accept</button>
+            <button mat-raised-button class="action-button" color="warn" (click)="declineRequest()" [hidden]="requestAccepted || requestDeclined">Decline</button>
+          </div>
+
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'sent'">
+          <p class="messages">Waiting for response</p>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'sameUser'">
+        
+        </ng-container>
+      </ng-container>
+    </mat-card-content>
+
+  </mat-card>

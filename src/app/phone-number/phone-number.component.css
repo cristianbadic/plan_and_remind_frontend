@@ -1,0 +1,38 @@
+.phone-number-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.phone-number-field {
+  margin-bottom: 10px;
+}
+
+.button {
+  margin-top: 10px;
+}
+
+.success-message {
+  color: rgb(54, 152, 54);
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.error-message {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}

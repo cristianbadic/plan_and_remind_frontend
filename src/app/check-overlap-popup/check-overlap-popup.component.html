@@ -1,0 +1,29 @@
+<mat-toolbar  class="check-toolbar" color="warn">
+    <h2  >Event Overlap Warning</h2>
+</mat-toolbar>
+
+<div mat-dialog-content>
+  <p class="message-warning">You have already existing events that will happen during your selected date and time interval!</p>
+  <p *ngIf="overlappingEvents.length === 1" class="message-black">The event is:</p>
+  <p *ngIf="overlappingEvents.length > 1" class="message-black">The events are:</p>
+  <ul>
+    <li *ngFor="let event of overlappingEvents" class="message-black">
+      {{ event.eventName }} - Organized by {{ event.firstName }} {{ event.lastName }}
+    </li>
+  </ul>
+
+  <ng-container *ngIf="isUpdateEvent; else createEvent">
+    <p class="question-text">Do you still want to update your event with the chosen date and time or do you want to go back to change these details?</p>
+  </ng-container>
+  
+  <ng-template #createEvent>
+    <p class="question-text">Do you still want to create your new event with the chosen date and time or do you want to go back to change these details?</p>
+  </ng-template>
+
+  <!-- <p class="question-text">Do you still want to create your new event with the chosen date and time or do you want to go back to change these details?</p> -->
+</div>
+<div mat-dialog-actions class="button-container">
+    <button mat-raised-button (click)="addOrUpdateTheEvent()" color="primary">Yes</button>
+    <button mat-raised-button (click)="closeDialog()" color="warn">Go Back</button>
+</div>
+

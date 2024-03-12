@@ -1,0 +1,20 @@
+<div class="search-bar">
+  <mat-form-field appearance="outline">
+    <mat-label>Search for users</mat-label>
+    <input
+      matInput
+      [(ngModel)]="searchInput"
+      placeholder="Search for users"
+    />
+    <mat-icon class='search-icon' color="primary" matSuffix (click)="searchUsers()"
+      >search</mat-icon
+    >
+  </mat-form-field>
+</div>
+
+<div *ngIf="displayedMess" class="search-message">{{ displayedMess }}</div>
+
+<div class="card-container" *ngIf="matchingUsers && matchingUsers.length > 0">
+  <app-user-item *ngFor="let userSearch of matchingUsers" [user]="userSearch">
+  </app-user-item>
+</div>

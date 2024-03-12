@@ -1,0 +1,24 @@
+
+.confirmationDialog {
+  margin:0 0 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+mat-toolbar.check-toolbar {
+  display: flex;
+
+  align-self: flex-start;
+  justify-content: center;
+  text-align: center;
+}
+
+.question-text {
+  display: flex;
+  margin-top:20px;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+}

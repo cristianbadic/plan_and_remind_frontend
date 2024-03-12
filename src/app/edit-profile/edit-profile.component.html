@@ -1,0 +1,105 @@
+<mat-card class="login-card">
+    <mat-card-content>
+      <mat-toolbar class="register-toolbar" color="primary">
+        <span class="text-center">Edit Your Profile</span>
+      </mat-toolbar>
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" id ="firstName" formControlName="firstName">
+      
+          <mat-error *ngIf="profileForm.get('firstName').invalid && profileForm.get('firstName').touched">
+            Your first name is required!
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" id ="lastName" formControlName="lastName">
+      
+          <mat-error *ngIf="profileForm.get('lastName').invalid && profileForm.get('lastName').touched">
+            Your last name is required!
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Birth Date</mat-label>
+          <input matInput [matDatepicker]="birthDatepicker" [max]="maxDate" formControlName="birthDate" id="birthDate">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="birthDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #birthDatepicker ></mat-datepicker>
+        
+          <mat-error *ngIf="profileForm.get('birthDate').invalid && profileForm.get('birthDate').touched">
+            Please provide your actual birth date!
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Please enter your current password</mat-label>
+          <input 
+            matInput 
+            [type]="hide ? 'password' : 'text'" 
+            id ="currentPassword" 
+            formControlName="currentPassword">
+            <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+      
+          <mat-error *ngIf="profileForm.get('currentPassword').invalid && profileForm.get('currentPassword').touched">
+            Please provide a password of at least 6 characters!
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Please enter your new password</mat-label>
+          <input 
+            matInput 
+            [type]="hideForNew ? 'password' : 'text'" 
+            id ="newPassword" 
+            formControlName="newPassword">
+            <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibilityForNew()">
+              <mat-icon>{{hideForNew ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+      
+          <mat-error *ngIf="profileForm.get('newPassword').invalid && profileForm.get('newPassword').touched">
+            Please provide a password of at least 6 characters!
+          </mat-error>
+        </mat-form-field>
+  
+  
+        <mat-form-field>
+          <mat-label>Confirm new password</mat-label>
+          <input matInput type="password" id="confirmNewPassword" formControlName="confirmNewPassword">
+  
+          <mat-error *ngIf="profileForm.get('confirmNewPassword').invalid && profileForm.get('confirmNewPassword').touched">
+            Please confirm your new password!
+          </mat-error>
+  
+        </mat-form-field>
+        <mat-error *ngIf="profileForm.hasError('passwordsMismatch') && profileForm.get('confirmNewPassword').touched">
+          Passwords do not match!
+        </mat-error>
+
+        <div *ngIf="profileForm.errors?.passwordMismatch2" class="warning-message">
+          All password fields must be filled or left empty if no password change is desired.
+        </div>
+  
+        <mat-form-field>
+          <mat-label>Link to your avatar</mat-label>
+          <input matInput type="text" id ="imageUrl" formControlName="imageUrl">
+        </mat-form-field>
+        
+      
+        <button mat-raised-button color="primary" [disabled]="profileForm.invalid || profileForm.get('newPassword').value !== profileForm.get('confirmNewPassword').value">
+          Save Changes <mat-icon>save</mat-icon>
+        </button>
+        
+  
+        <mat-error class="error-message" *ngIf="validationError">
+          {{ validationError }}
+        </mat-error>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+  
